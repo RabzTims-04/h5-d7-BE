@@ -1,0 +1,35 @@
+{
+  "name": "h5-d7-BE",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RabzTims-04/m5-d7-BE.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RabzTims-04/m5-d7-BE/issues"
+  },
+  "homepage": "https://github.com/RabzTims-04/m5-d7-BE#readme",
+  "dependencies": {
+    "cloudinary": "^1.26.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-list-endpoints": "^5.0.0",
+    "express-validator": "^6.12.0",
+    "fs-extra": "^10.0.0",
+    "multer": "^1.4.2",
+    "multer-storage-cloudinary": "^4.0.0",
+    "uniqid": "^5.3.0"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0",
+    "nodemon": "^2.0.7"
+  }
+}
