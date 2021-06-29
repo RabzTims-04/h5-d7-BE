@@ -2,9 +2,11 @@ import express from "express";
 import uniqid from 'uniqid'
 import createError from 'http-errors'
 import multer from "multer";
+import { v2 as cloudinary } from "cloudinary";
+import { CloudinaryStorage } from 'multer-storage-cloudinary'
 import { extname } from "path"
 import { validationResult } from 'express-validator'
-import { getProducts, writeProducts, writeProductsPicture } from "../../lib/fs-tools.js";
+import { getProducts, writeProducts } from "../../lib/fs-tools.js";
 import { checkSearchSchema, checkReviewSchema, checkValidationResult, checkProductsSchema } from "./validation.js";
 
 const productsRouter = express.Router()
@@ -121,13 +123,31 @@ productsRouter.delete("/:id", async(req, res, next)=>{
 
 
 /* *********************POST Image of product************************* */
+const cloudinaryStorage = new CloudinaryStorage({
+    cloudinary,
+    params:{
+        folder:"products"
+    }
+})
+
+const uploadOnCloudinary = multer({ storage: cloudinaryStorage}).single("image")
 
 /* POST an Image to a specific product */
-productsRouter.post('/:id/upload',multer().single("image"),async (req,res, next)=>{
+productsRouter.post('/:id/upload',uploadOnCloudinary,async (req,res, next)=>{
 
     try { 
         console.log(req.body);
-        const fileName = req.file.originalname.slice(-4)
+        const newProduct = { image : req.file.path}
+        console.log(newProduct.image);
+        const url = newProduct.image
+        const products = await getProducts()
+        const product = products.find(product => product._id === req.params.id)
+        if(product){
+            product.imageUrl = url
+            await writeProducts(products)
+        }
+        res.send(newProduct.image)
+        /* const fileName = req.file.originalname.slice(-4)
         const newFileName = req.params.id.concat(fileName)
         const url = `http://localhost:3002/img/products/${req.params.id}${extname(req.file.originalname)}`
         console.log(newFileName);
@@ -139,7 +159,7 @@ productsRouter.post('/:id/upload',multer().single("image"),async (req,res, next)
             product.image = url
             await writeProducts(products)
         }
-        res.send(product.image)      
+        res.send(product.image) */      
         
     } catch (error) {
         next(error)
