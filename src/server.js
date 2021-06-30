@@ -6,11 +6,11 @@ import productsRouter from './services/products/index.js'
 import { catchAllErrors, badRequestMiddleware, notFoundMiddleWare } from "./errorMiddlewares.js"
 /* import { getCurrentFolderPath } from "./lib/fs-tools.js" */
 
-const {PORT} = process.env
+const PORT = 3005 || process.env.PORT
 const server = express()
 /* const publicFolderPath = join(getCurrentFolderPath(import.meta.url), "../public")
  */
-const whitelist = [process.env.FRONTEND_URL, process.env.FRONTEND_PROD_URL]
+const whitelist = [process.env.FRONTEND_URL, process.env.FRONTEND_PROD_URL, process.env.VERCEL_URL]
 console.log(process.env.FRONTEND_URL);
 /* ************MIDDLEWARES***************** */
 

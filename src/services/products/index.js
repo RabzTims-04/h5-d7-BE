@@ -286,6 +286,9 @@ productsRouter.delete('/:id/reviews/:revId',async (req,res, next)=>{
             await writeProducts(products)
             res.status(200)      
         }
+        else{
+            next(createError(400, 'error deleting review'))
+        }
     } catch (error) {
         next(error)
     }
