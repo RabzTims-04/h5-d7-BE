@@ -10,7 +10,7 @@ import {
 } from "./errorMiddlewares.js";
 /* import { getCurrentFolderPath } from "./lib/fs-tools.js" */
 
-const PORT = process.env.PORT || 3005;
+const PORT = process.env.PORT;
 const server = express();
 /* const publicFolderPath = join(getCurrentFolderPath(import.meta.url), "../public")
  */
