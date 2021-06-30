@@ -19,6 +19,7 @@ const whitelist = [
   process.env.FRONTEND_PROD_URL,
   process.env.VERCEL_URL,
   process.env.VERCEL_URL_SECOND,
+  process.env.VERCEL_URL_THIRD
 ];
 console.log(process.env.FRONTEND_URL);
 /* ************MIDDLEWARES***************** */
