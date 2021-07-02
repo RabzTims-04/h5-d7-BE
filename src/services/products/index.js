@@ -226,7 +226,7 @@ productsRouter.post("/:id/reviews",checkReviewSchema,checkValidationResult, asyn
                 await writeProducts(products)
                 res.status(201).send({_id: newReview._id})
             }
-        }
+        } 
         else{
             next(createError(400, {errorList:errors}))
         }
